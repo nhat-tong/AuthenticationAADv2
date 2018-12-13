@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Client.API.MicrosoftGraph.ApplicationPermission</name>
+    </assembly>
+    <members>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Controllers.UserController.Get">
+            <summary>
+            Retrieve all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Controllers.UserController.Get(System.String)">
+            <summary>
+            Retrieve user by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Client.API.MicrosoftGraph.ApplicationPermission.Framework.MsGraphService">
+            <summary>
+            Base class for all services
+            </summary>
+        </member>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Framework.MsGraphService.GetAccessToken">
+            <summary>
+            Retrieve an access token to call MS Graph API
+            </summary>
+            <see cref="!:https://developer.microsoft.com/en-us/graph/docs/concepts/auth_v2_service"/>
+            <seealso cref="!:https://stackoverflow.com/questions/37151346/authorization-identitynotfound-error-while-accessing-graph-api"/>
+            <returns>access token</returns>
+        </member>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Framework.MsGraphService.RequestAccessToken">
+            <summary>
+            Make a request to AAD v2 endpoint to obtain a new access token
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Framework.MsGraphService.GetAuthenticatedClient">
+            <summary>
+            Return a authenticated client
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Framework.MsGraphService.CreateClient(System.String)">
+            <summary>
+            Create rest client
+            </summary>
+            <param name="endpoint">endpoint to request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Framework.MsGraphService.CreateRequest(RestSharp.Method,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Create rest request with all headers required
+            </summary>
+            <param name="method"></param>
+            <param name="payload"></param>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Framework.MsGraphService.GetResponse(System.String,RestSharp.Method,System.Collections.Generic.Dictionary{System.String,System.String},System.Object)">
+            <summary>
+            Return response from api
+            </summary>
+            <param name="endpoint"></param>
+            <param name="method"></param>
+            <param name="headers"></param>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Client.API.MicrosoftGraph.ApplicationPermission.Framework.MsGraphService.CreateApiResult``1(RestSharp.IRestResponse)">
+            <summary>
+            Create api result
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="restResponse"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
