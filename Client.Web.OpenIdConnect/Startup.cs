@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿#region using
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+#endregion
 
 namespace Client.Web.OpenIdConnect
 {
@@ -31,6 +31,20 @@ namespace Client.Web.OpenIdConnect
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2
+            services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
+            .AddCookie(options => 
+            {
+                options.LoginPath = "/Account/SignIn";
+                options.LogoutPath = "/Account/SignOut";
+            })
+            .AddAzureAD(options => Configuration.Bind("AzureAd", options));
+
+            services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
+            {
+                options.Authority = options.Authority + "/v2.0/";
+                options.TokenValidationParameters.ValidateIssuer = false;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -51,6 +65,8 @@ namespace Client.Web.OpenIdConnect
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
